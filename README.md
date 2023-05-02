@@ -122,3 +122,7 @@ output {
 The above logstash configuration accepts tcp input connections on port 5044 (earlier configured destination for logstash encoder) and creates an output pipeline to elasticsearch on port 9200 with a logstash-%{+YYYY.MM.dd} index. The index can be accessed on kibana on port 5601 where it can be used to create an index(`logstash-*`) for visualization.
 
 The config above also creates a filter that creates the index based on the service_name in the custom fields. This can be useful when need to create different index for different applications
+
+![Screenshot from 2023-05-02 12-19-31](https://user-images.githubusercontent.com/6048594/235629579-390d958b-6911-47a9-ab21-dbfa11f39b00.png)
+
+
