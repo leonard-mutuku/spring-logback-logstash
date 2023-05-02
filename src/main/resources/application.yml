@@ -1,0 +1,18 @@
+## YAML Template.
+---
+server:
+    port: 9300
+    
+spring:
+    application:
+        name: logstash-demo
+    
+app:
+    logs:
+        location: /tmp/app_logs
+    
+elk:
+    enabled: true
+    logstash:
+        server: 127.0.0.1
+        port: 5044
