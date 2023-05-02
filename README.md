@@ -12,7 +12,7 @@ Dependencies required for the application to ship logs is the logback encoder be
 </dependency>
 ```
 
-Logback spring configuration is as below;
+Logback spring configuration(`logback-spring.xml`) is as below;
 
 ```xml
 <configuration>
@@ -80,10 +80,10 @@ Logback spring configuration is as below;
 
 </configuration>
 ```
-springProperty values are derived from application.yml which can be overriden at runtime. The values are used to configure logging and also used turn on/off shipping of logs to logstash condition. if logstash.enabled value is set to false logging will only be for logback file (/tmp/app_logs). STASH_LOG is the appender configured for sending of logs to logstash, where <destination> holds the address of logstash.
+`springProperty` values are derived from `application.yml` which can be overriden at runtime. The values are used to configure logging and also used turn on/off shipping of logs to logstash conditionally. If `logstash.enabled` value is set to false logging will only be for logback file (`/tmp/app_logs/*`). `STASH_LOG` is the appender configured for sending logs to logstash, where `<destination>` holds the address where the logstash instance is running.
 
 
-Logstash configuration is as below;
+Logstash configuration(`/etc/logstash/conf.d/*.conf`) is as below;
 
 ```conf
 # Beats -> Logstash -> Elasticsearch pipeline.
@@ -119,6 +119,6 @@ output {
 }
 ```
 
-The above logstash configuration(/etc/logstash/conf.d/*.conf) accepts tcp input connections on port 5044 (earlier configured destination on for logstash encoder) and creates an output pipeline to elasticsearch on port 9200 with a logstash-%{+YYYY.MM.dd} index. The index can be access on kibana on port 5601 which can be used to create an index(logstash-*) for visualization.
+The above logstash configuration accepts tcp input connections on port 5044 (earlier configured destination for logstash encoder) and creates an output pipeline to elasticsearch on port 9200 with a logstash-%{+YYYY.MM.dd} index. The index can be accessed on kibana on port 5601 where it can be used to create an index(`logstash-*`) for visualization.
 
 The config above also creates a filter that creates the index based on the service_name in the custom fields. This can be useful when need to create different index for different applications
